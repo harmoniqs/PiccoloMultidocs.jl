@@ -50,10 +50,10 @@ docs = [
                 # giturl = "git@github.com:JuliaComputing/DataSets.jl.git",
             ),
             MultiDocumenter.MultiDocRef(
-                upstream = joinpath(clonedir, "QuantumCollocationCore"),
-                path = "QuantumCollocationCore",
-                name = "QuantumCollocationCore.jl",
-                giturl = "https://github.com/harmoniqs/QuantumCollocationCore.jl.git",
+                upstream = joinpath(clonedir, "DirectTrajOpt"),
+                path = "DirectTrajOpt",
+                name = "DirectTrajOpt.jl",
+                giturl = "https://github.com/harmoniqs/DirectTrajOpt.jl.git",
             ),
         ],
     ),
@@ -86,7 +86,7 @@ MultiDocumenter.make(
     outpath,
     docs;
     search_engine = MultiDocumenter.SearchConfig(
-        index_versions = ["stable"],
+        index_versions = ["dev"],
         engine = MultiDocumenter.FlexSearch,
     ),
     rootpath = "/",
