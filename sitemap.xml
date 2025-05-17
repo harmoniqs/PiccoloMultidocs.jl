@@ -1,8 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-<url><loc>https://docs.harmoniqs.co/DirectTrajOpt/dev/</loc></url>
-<url><loc>https://docs.harmoniqs.co/DirectTrajOpt/dev/generated/explanation/</loc></url>
-<url><loc>https://docs.harmoniqs.co/DirectTrajOpt/dev/lib/</loc></url>
 <url><loc>https://docs.harmoniqs.co/NamedTrajectories/dev/</loc></url>
 <url><loc>https://docs.harmoniqs.co/NamedTrajectories/dev/generated/man/add_remove/</loc></url>
 <url><loc>https://docs.harmoniqs.co/NamedTrajectories/dev/generated/man/constructors/</loc></url>
@@ -40,8 +37,13 @@
 <url><loc>https://docs.harmoniqs.co/PiccoloQuantumObjects/dev/generated/quantum_systems/</loc></url>
 <url><loc>https://docs.harmoniqs.co/PiccoloQuantumObjects/dev/generated/rollouts/</loc></url>
 <url><loc>https://docs.harmoniqs.co/PiccoloQuantumObjects/dev/lib/</loc></url>
-<url><loc>https://docs.harmoniqs.co/QuantumCollocation/dev/</loc></url>
-<url><loc>https://docs.harmoniqs.co/QuantumCollocation/dev/generated/man/problem_templates/</loc></url>
-<url><loc>https://docs.harmoniqs.co/QuantumCollocation/dev/lib/</loc></url>
+<url><loc>https://docs.harmoniqs.co/QuantumCollocation/stable/</loc></url>
+<url><loc>https://docs.harmoniqs.co/QuantumCollocation/stable/generated/man/ket_problem_templates/</loc></url>
+<url><loc>https://docs.harmoniqs.co/QuantumCollocation/stable/generated/man/problem_templates/</loc></url>
+<url><loc>https://docs.harmoniqs.co/QuantumCollocation/stable/generated/man/unitary_problem_templates/</loc></url>
+<url><loc>https://docs.harmoniqs.co/QuantumCollocation/stable/lib/</loc></url>
+<url><loc>https://docs.harmoniqs.co/QuantumCollocationCore/dev/</loc></url>
+<url><loc>https://docs.harmoniqs.co/QuantumCollocationCore/dev/generated/explanation/</loc></url>
+<url><loc>https://docs.harmoniqs.co/QuantumCollocationCore/dev/lib/</loc></url>
 <url><loc>https://docs.harmoniqs.co/TrajectoryIndexingUtils/dev/</loc></url>
 </urlset>
