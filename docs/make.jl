@@ -93,6 +93,7 @@ docs = [
                 giturl = "https://github.com/harmoniqs/QuantumCollocationCore.jl.git",
             ),
         ]
+    ),
 ]
 
 MultiDocumenter.make(
