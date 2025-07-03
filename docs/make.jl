@@ -50,10 +50,12 @@ docs = [
                 # giturl = "git@github.com:JuliaComputing/DataSets.jl.git",
             ),
             MultiDocumenter.MultiDocRef(
-                upstream = joinpath(clonedir, "QuantumCollocationCore"),
-                path = "QuantumCollocationCore",
-                name = "QuantumCollocationCore.jl",
-                giturl = "https://github.com/harmoniqs/QuantumCollocationCore.jl.git",
+                upstream = joinpath(clonedir, "DirectTrajOpt"),
+                path = "DirectTrajOpt",
+                name = "DirectTrajOpt.jl",
+                giturl = "https://github.com/harmoniqs/DirectTrajOpt.jl.git",
+                # or use ssh instead for private repos:
+                # giturl = "git@github.com:JuliaComputing/DataSets.jl.git",
             ),
         ],
     ),
@@ -80,6 +82,17 @@ docs = [
         name = "Plots",
         giturl = "https://github.com/harmoniqs/PiccoloPlots.jl.git",
     ),
+
+    MultiDocumenter.DropdownNav(
+        "Archive",
+        [
+            MultiDocumenter.MultiDocRef(
+                upstream = joinpath(clonedir, "QuantumCollocationCore"),
+                path = "QuantumCollocationCore",
+                name = "QuantumCollocationCore.jl",
+                giturl = "https://github.com/harmoniqs/QuantumCollocationCore.jl.git",
+            ),
+        ]
 ]
 
 MultiDocumenter.make(
