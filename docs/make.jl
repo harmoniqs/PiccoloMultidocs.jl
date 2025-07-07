@@ -122,7 +122,6 @@ if "deploy" in ARGS
         end
     end
     for file in readdir(gitroot; join = true)
-        file == "CNAME" && continue
         endswith(file, ".git") && continue
         rm(file; force = true, recursive = true)
     end
