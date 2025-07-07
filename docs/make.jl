@@ -108,6 +108,8 @@ MultiDocumenter.make(
     sitemap = true,
 )
 
+cp(normpath(joinpath(@__DIR__, "..", "CNAME")), joinpath(outpath, "CNAME"), force=true)
+
 if "deploy" in ARGS
     @warn "Deploying to GitHub" ARGS
     gitroot = normpath(joinpath(@__DIR__, ".."))
