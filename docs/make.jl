@@ -116,8 +116,7 @@ if "deploy" in ARGS
     run(`git pull`)
     outbranch = "gh-pages"
     has_outbranch = true
-    # if !success(`git checkout $outbranch`)
-    if true
+    if !success(`git checkout $outbranch`)
         has_outbranch = false
         if !success(`git switch --orphan $outbranch`)
             @error "Cannot create new orphaned branch $outbranch."
