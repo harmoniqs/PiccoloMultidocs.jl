@@ -138,7 +138,7 @@ if "deploy" in ARGS
         # else
         #     run(`git push -u origin $outbranch`)
         # end
-        run(`git push -u origin $outbranch`)
+        run(`git push -u origin $outbranch:$outbranch`)
         run(`git checkout main`)
     else
         @info "No changes to aggregated documentation."
