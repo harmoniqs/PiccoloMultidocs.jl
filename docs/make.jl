@@ -133,11 +133,12 @@ if "deploy" in ARGS
     run(`git add .`)
     if success(`git commit -m 'Aggregate documentation'`)
         @info "Pushing updated documentation."
-        if has_outbranch
-            run(`git push`)
-        else
-            run(`git push -u origin $outbranch`)
-        end
+        # if has_outbranch
+        #     run(`git push`)
+        # else
+        #     run(`git push -u origin $outbranch`)
+        # end
+        run(`git push -u origin $outbranch`)
         run(`git checkout main`)
     else
         @info "No changes to aggregated documentation."
