@@ -46,16 +46,12 @@ docs = [
                 path = "QuantumCollocation",
                 name = "QuantumCollocation.jl",
                 giturl = "https://github.com/harmoniqs/QuantumCollocation.jl.git",
-                # or use ssh instead for private repos:
-                # giturl = "git@github.com:JuliaComputing/DataSets.jl.git",
             ),
             MultiDocumenter.MultiDocRef(
                 upstream = joinpath(clonedir, "DirectTrajOpt"),
                 path = "DirectTrajOpt",
                 name = "DirectTrajOpt.jl",
                 giturl = "https://github.com/harmoniqs/DirectTrajOpt.jl.git",
-                # or use ssh instead for private repos:
-                # giturl = "git@github.com:JuliaComputing/DataSets.jl.git",
             ),
         ],
     ),
@@ -100,7 +96,7 @@ MultiDocumenter.make(
     outpath,
     docs;
     search_engine = MultiDocumenter.SearchConfig(
-        index_versions = ["stable"],
+        index_versions = ["dev"],
         engine = MultiDocumenter.FlexSearch,
     ),
     rootpath = "/",
