@@ -31,12 +31,14 @@ docs = [
         path = "Piccolo",
         name = "Piccolo",
         giturl = "https://github.com/harmoniqs/Piccolo.jl.git",
+        branch = "feature/new-docs",
     ),
     MultiDocumenter.MultiDocRef(
         upstream = joinpath(clonedir, "PiccoloQuantumObjects"),
         path = "PiccoloQuantumObjects",
         name = "Quantum Objects",
         giturl = "https://github.com/harmoniqs/PiccoloQuantumObjects.jl.git",
+        branch = "feature/docs_template_refactor",
     ),
     MultiDocumenter.DropdownNav(
         "Optimal Controls",
@@ -46,16 +48,14 @@ docs = [
                 path = "QuantumCollocation",
                 name = "QuantumCollocation.jl",
                 giturl = "https://github.com/harmoniqs/QuantumCollocation.jl.git",
-                # or use ssh instead for private repos:
-                # giturl = "git@github.com:JuliaComputing/DataSets.jl.git",
+                branch = "feature/docs-revamp",
             ),
             MultiDocumenter.MultiDocRef(
                 upstream = joinpath(clonedir, "DirectTrajOpt"),
                 path = "DirectTrajOpt",
                 name = "DirectTrajOpt.jl",
                 giturl = "https://github.com/harmoniqs/DirectTrajOpt.jl.git",
-                # or use ssh instead for private repos:
-                # giturl = "git@github.com:JuliaComputing/DataSets.jl.git",
+                branch = "feature/docs_refactor",
             ),
         ],
     ),
@@ -67,12 +67,14 @@ docs = [
                 path = "NamedTrajectories",
                 name = "NamedTrajectories.jl",
                 giturl = "https://github.com/harmoniqs/NamedTrajectories.jl.git",
+                branch = "feature/docs_refactor",
             ),
             MultiDocumenter.MultiDocRef(
                 upstream = joinpath(clonedir, "TrajectoryIndexingUtils"),
                 path = "TrajectoryIndexingUtils",
                 name = "TrajectoryIndexingUtils.jl",
                 giturl = "https://github.com/harmoniqs/TrajectoryIndexingUtils.jl.git",
+                branch = "feature/docs_template_refactor",
             ),
         ],
     ),
@@ -81,6 +83,7 @@ docs = [
         path = "PiccoloPlots",
         name = "Plots",
         giturl = "https://github.com/harmoniqs/PiccoloPlots.jl.git",
+        branch = "feature/new_shared_docs",
     ),
 
     MultiDocumenter.DropdownNav(
@@ -100,7 +103,7 @@ MultiDocumenter.make(
     outpath,
     docs;
     search_engine = MultiDocumenter.SearchConfig(
-        index_versions = ["stable"],
+        index_versions = ["dev"],
         engine = MultiDocumenter.FlexSearch,
     ),
     rootpath = "/",
