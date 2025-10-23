@@ -134,11 +134,12 @@ if "deploy" in ARGS
         @info "Pushing updated documentation."
         run(`git remote set-url origin https://$DEPLOY_TOKEN@github.com/$REPO_NAME.git`)
 
-        if has_outbranch
-            run(`git push`)
-        else
-            run(`git push -u origin $outbranch`)
-        end
+        # if has_outbranch
+        #     run(`git push`)
+        # else
+        #     run(`git push -u origin $outbranch`)
+        # end
+        run(`git push -u origin $outbranch:$outbranch`)
         run(`git checkout main`)
     else
         @info "No changes to aggregated documentation."
