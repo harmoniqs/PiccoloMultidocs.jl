@@ -21,7 +21,6 @@ jobs:
           TODAY_DATE=$(date +%Y-%m-%d)
           git config user.name github-actions
           git config user.email github-actions@github.com
-          git branch -m gh-pages gh-pages-${TODAY_DATE}
           julia --project=docs docs/make.jl deploy
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
