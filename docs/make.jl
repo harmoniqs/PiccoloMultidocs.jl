@@ -10,6 +10,9 @@
 using MultiDocumenter
 using Documenter
 
+DEPLOY_TOKEN = get(ENV, "DEPLOY_TOKEN", "")
+REPO_NAME = get(ENV, "REPO_NAME", "")
+
 clonedir = ("--temp" in ARGS) ? mktempdir() : joinpath(@__DIR__, "clones")
 outpath = mktempdir()
 @info """
@@ -129,6 +132,8 @@ if "deploy" in ARGS
     run(`git add .`)
     if success(`git commit -m 'Aggregate documentation'`)
         @info "Pushing updated documentation."
+        run(`git remote set-url origin https://$DEPLOY_TOKEN@github.com/$REPO_NAME.git`)
+
         if has_outbranch
             run(`git push`)
         else
