@@ -1,7 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url><loc>https://docs.harmoniqs.co/DirectTrajOpt/dev/</loc></url>
+<url><loc>https://docs.harmoniqs.co/DirectTrajOpt/dev/generated/concepts/constraints/</loc></url>
+<url><loc>https://docs.harmoniqs.co/DirectTrajOpt/dev/generated/concepts/integrators/</loc></url>
+<url><loc>https://docs.harmoniqs.co/DirectTrajOpt/dev/generated/concepts/objectives/</loc></url>
+<url><loc>https://docs.harmoniqs.co/DirectTrajOpt/dev/generated/concepts/problem_formulation/</loc></url>
+<url><loc>https://docs.harmoniqs.co/DirectTrajOpt/dev/generated/concepts/trajectories/</loc></url>
+<url><loc>https://docs.harmoniqs.co/DirectTrajOpt/dev/generated/example/</loc></url>
 <url><loc>https://docs.harmoniqs.co/DirectTrajOpt/dev/generated/explanation/</loc></url>
+<url><loc>https://docs.harmoniqs.co/DirectTrajOpt/dev/generated/quickstart/</loc></url>
 <url><loc>https://docs.harmoniqs.co/DirectTrajOpt/dev/lib/</loc></url>
 <url><loc>https://docs.harmoniqs.co/NamedTrajectories/dev/</loc></url>
 <url><loc>https://docs.harmoniqs.co/NamedTrajectories/dev/generated/man/add_remove/</loc></url>
@@ -38,6 +45,7 @@
 <url><loc>https://docs.harmoniqs.co/PiccoloQuantumObjects/dev/generated/isomorphisms/</loc></url>
 <url><loc>https://docs.harmoniqs.co/PiccoloQuantumObjects/dev/generated/quantum_objects/</loc></url>
 <url><loc>https://docs.harmoniqs.co/PiccoloQuantumObjects/dev/generated/quantum_systems/</loc></url>
+<url><loc>https://docs.harmoniqs.co/PiccoloQuantumObjects/dev/generated/quickstart/</loc></url>
 <url><loc>https://docs.harmoniqs.co/PiccoloQuantumObjects/dev/generated/rollouts/</loc></url>
 <url><loc>https://docs.harmoniqs.co/PiccoloQuantumObjects/dev/lib/</loc></url>
 <url><loc>https://docs.harmoniqs.co/QuantumCollocation/dev/</loc></url>
