@@ -36,27 +36,10 @@ docs = [
         giturl = "https://github.com/harmoniqs/Piccolo.jl.git",
     ),
     MultiDocumenter.MultiDocRef(
-        upstream = joinpath(clonedir, "PiccoloQuantumObjects"),
-        path = "PiccoloQuantumObjects",
-        name = "Quantum Objects",
-        giturl = "https://github.com/harmoniqs/PiccoloQuantumObjects.jl.git",
-    ),
-    MultiDocumenter.DropdownNav(
-        "Optimal Controls",
-        [
-            MultiDocumenter.MultiDocRef(
-                upstream = joinpath(clonedir, "QuantumCollocation"),
-                path = "QuantumCollocation",
-                name = "QuantumCollocation.jl",
-                giturl = "https://github.com/harmoniqs/QuantumCollocation.jl.git",
-            ),
-            MultiDocumenter.MultiDocRef(
-                upstream = joinpath(clonedir, "DirectTrajOpt"),
-                path = "DirectTrajOpt",
-                name = "DirectTrajOpt.jl",
-                giturl = "https://github.com/harmoniqs/DirectTrajOpt.jl.git",
-            ),
-        ],
+        upstream = joinpath(clonedir, "DirectTrajOpt"),
+        path = "DirectTrajOpt",
+        name = "DirectTrajOpt.jl",
+        giturl = "https://github.com/harmoniqs/DirectTrajOpt.jl.git",
     ),
     MultiDocumenter.DropdownNav(
         "Trajectories",
@@ -75,23 +58,34 @@ docs = [
             ),
         ],
     ),
-    MultiDocumenter.MultiDocRef(
-        upstream = joinpath(clonedir, "PiccoloPlots"),
-        path = "PiccoloPlots",
-        name = "Plots",
-        giturl = "https://github.com/harmoniqs/PiccoloPlots.jl.git",
-    ),
-
     MultiDocumenter.DropdownNav(
         "Archive",
         [
+            MultiDocumenter.MultiDocRef(
+                upstream = joinpath(clonedir, "PiccoloQuantumObjects"),
+                path = "PiccoloQuantumObjects",
+                name = "PiccoloQuantumObjects.jl",
+                giturl = "https://github.com/harmoniqs/PiccoloQuantumObjects.jl.git",
+            ),
+            MultiDocumenter.MultiDocRef(
+                upstream = joinpath(clonedir, "QuantumCollocation"),
+                path = "QuantumCollocation",
+                name = "QuantumCollocation.jl",
+                giturl = "https://github.com/harmoniqs/QuantumCollocation.jl.git",
+            ),
+            MultiDocumenter.MultiDocRef(
+                upstream = joinpath(clonedir, "PiccoloPlots"),
+                path = "PiccoloPlots",
+                name = "PiccoloPlots.jl",
+                giturl = "https://github.com/harmoniqs/PiccoloPlots.jl.git",
+            ),
             MultiDocumenter.MultiDocRef(
                 upstream = joinpath(clonedir, "QuantumCollocationCore"),
                 path = "QuantumCollocationCore",
                 name = "QuantumCollocationCore.jl",
                 giturl = "https://github.com/harmoniqs/QuantumCollocationCore.jl.git",
             ),
-        ]
+        ],
     ),
 ]
 
