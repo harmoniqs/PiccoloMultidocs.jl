@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-<url><loc>https://docs.harmoniqs.co/DirectTrajOpt/dev/</loc></url>
-<url><loc>https://docs.harmoniqs.co/DirectTrajOpt/dev/generated/concepts/constraints/</loc></url>
-<url><loc>https://docs.harmoniqs.co/DirectTrajOpt/dev/generated/concepts/integrators/</loc></url>
-<url><loc>https://docs.harmoniqs.co/DirectTrajOpt/dev/generated/concepts/objectives/</loc></url>
-<url><loc>https://docs.harmoniqs.co/DirectTrajOpt/dev/generated/concepts/problem_formulation/</loc></url>
-<url><loc>https://docs.harmoniqs.co/DirectTrajOpt/dev/generated/concepts/trajectories/</loc></url>
-<url><loc>https://docs.harmoniqs.co/DirectTrajOpt/dev/generated/example/</loc></url>
-<url><loc>https://docs.harmoniqs.co/DirectTrajOpt/dev/generated/explanation/</loc></url>
-<url><loc>https://docs.harmoniqs.co/DirectTrajOpt/dev/generated/quickstart/</loc></url>
-<url><loc>https://docs.harmoniqs.co/DirectTrajOpt/dev/lib/</loc></url>
+<url><loc>https://docs.harmoniqs.co/DirectTrajOpt/stable/</loc></url>
+<url><loc>https://docs.harmoniqs.co/DirectTrajOpt/stable/generated/concepts/constraints/</loc></url>
+<url><loc>https://docs.harmoniqs.co/DirectTrajOpt/stable/generated/concepts/integrators/</loc></url>
+<url><loc>https://docs.harmoniqs.co/DirectTrajOpt/stable/generated/concepts/objectives/</loc></url>
+<url><loc>https://docs.harmoniqs.co/DirectTrajOpt/stable/generated/concepts/problem_formulation/</loc></url>
+<url><loc>https://docs.harmoniqs.co/DirectTrajOpt/stable/generated/concepts/trajectories/</loc></url>
+<url><loc>https://docs.harmoniqs.co/DirectTrajOpt/stable/generated/example/</loc></url>
+<url><loc>https://docs.harmoniqs.co/DirectTrajOpt/stable/generated/explanation/</loc></url>
+<url><loc>https://docs.harmoniqs.co/DirectTrajOpt/stable/generated/quickstart/</loc></url>
+<url><loc>https://docs.harmoniqs.co/DirectTrajOpt/stable/lib/</loc></url>
 <url><loc>https://docs.harmoniqs.co/NamedTrajectories/dev/</loc></url>
 <url><loc>https://docs.harmoniqs.co/NamedTrajectories/dev/generated/man/add_remove/</loc></url>
 <url><loc>https://docs.harmoniqs.co/NamedTrajectories/dev/generated/man/constructors/</loc></url>
