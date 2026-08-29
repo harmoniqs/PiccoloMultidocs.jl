@@ -6,12 +6,12 @@ qcp_base = SmoothPulseProblem(qtraj; Δt_bounds=(0.01, 0.5))
 solve!(qcp_base)
 qcp_mintime = MinimumTimeProblem(qcp_base; final_fidelity=0.99)</code></pre><h2 id="Prerequisites"><a class="docs-heading-anchor" href="#Prerequisites">Prerequisites</a><a id="Prerequisites-1"></a><a class="docs-heading-anchor-permalink" href="#Prerequisites" title="Permalink"></a></h2><p>The base problem <strong>must</strong> have <code>Δt_bounds</code> set to enable variable timesteps:</p><pre><code class="language-julia hljs"># Enable free-time optimization in the base problem
 qcp_base = SmoothPulseProblem(qtraj; Δt_bounds=(0.01, 0.5))</code></pre><h2 id="Constructor"><a class="docs-heading-anchor" href="#Constructor">Constructor</a><a id="Constructor-1"></a><a class="docs-heading-anchor-permalink" href="#Constructor" title="Permalink"></a></h2><pre><code class="language-julia hljs">MinimumTimeProblem(
-    qcp::QuantumControlProblem;
+    p::AbstractQuantumControlProblem;
     goal = nothing,
     final_fidelity = 0.99,
     D = 100.0,
     piccolo_options = PiccoloOptions()
-)</code></pre><h2 id="Parameter-Reference"><a class="docs-heading-anchor" href="#Parameter-Reference">Parameter Reference</a><a id="Parameter-Reference-1"></a><a class="docs-heading-anchor-permalink" href="#Parameter-Reference" title="Permalink"></a></h2><table><tbody><tr><th style="text-align: right">Parameter</th><th style="text-align: right">Type</th><th style="text-align: right">Default</th><th style="text-align: right">Description</th></tr><tr><td style="text-align: right"><code>qcp</code></td><td style="text-align: right"><code>QuantumControlProblem</code></td><td style="text-align: right">required</td><td style="text-align: right">Base problem to convert (must have <code>Δt_bounds</code>)</td></tr><tr><td style="text-align: right"><code>goal</code></td><td style="text-align: right"><code>AbstractPiccoloOperator</code> or <code>AbstractVector</code></td><td style="text-align: right"><code>nothing</code></td><td style="text-align: right">Optional new goal (uses base problem's goal if <code>nothing</code>)</td></tr><tr><td style="text-align: right"><code>final_fidelity</code></td><td style="text-align: right"><code>Float64</code></td><td style="text-align: right"><code>0.99</code></td><td style="text-align: right">Minimum fidelity constraint</td></tr><tr><td style="text-align: right"><code>D</code></td><td style="text-align: right"><code>Float64</code></td><td style="text-align: right"><code>100.0</code></td><td style="text-align: right">Weight on total time objective</td></tr><tr><td style="text-align: right"><code>piccolo_options</code></td><td style="text-align: right"><code>PiccoloOptions</code></td><td style="text-align: right"><code>PiccoloOptions()</code></td><td style="text-align: right">Solver options</td></tr></tbody></table><h2 id="Optimization-Problem"><a class="docs-heading-anchor" href="#Optimization-Problem">Optimization Problem</a><a id="Optimization-Problem-1"></a><a class="docs-heading-anchor-permalink" href="#Optimization-Problem" title="Permalink"></a></h2><p><code>MinimumTimeProblem</code> sets up:</p><pre><code class="nohighlight hljs">minimize:    J_original + D × Σ Δtₖ
+)</code></pre><h2 id="Parameter-Reference"><a class="docs-heading-anchor" href="#Parameter-Reference">Parameter Reference</a><a id="Parameter-Reference-1"></a><a class="docs-heading-anchor-permalink" href="#Parameter-Reference" title="Permalink"></a></h2><table><tbody><tr><th style="text-align: right">Parameter</th><th style="text-align: right">Type</th><th style="text-align: right">Default</th><th style="text-align: right">Description</th></tr><tr><td style="text-align: right"><code>p</code></td><td style="text-align: right"><code>AbstractQuantumControlProblem</code></td><td style="text-align: right">required</td><td style="text-align: right">Base problem to convert (must have <code>Δt_bounds</code>)</td></tr><tr><td style="text-align: right"><code>goal</code></td><td style="text-align: right"><code>AbstractPiccoloOperator</code> or <code>AbstractVector</code></td><td style="text-align: right"><code>nothing</code></td><td style="text-align: right">Optional new goal (uses base problem's goal if <code>nothing</code>)</td></tr><tr><td style="text-align: right"><code>final_fidelity</code></td><td style="text-align: right"><code>Float64</code></td><td style="text-align: right"><code>0.99</code></td><td style="text-align: right">Minimum fidelity constraint</td></tr><tr><td style="text-align: right"><code>D</code></td><td style="text-align: right"><code>Float64</code></td><td style="text-align: right"><code>100.0</code></td><td style="text-align: right">Weight on total time objective</td></tr><tr><td style="text-align: right"><code>piccolo_options</code></td><td style="text-align: right"><code>PiccoloOptions</code></td><td style="text-align: right"><code>PiccoloOptions()</code></td><td style="text-align: right">Solver options</td></tr></tbody></table><h2 id="Optimization-Problem"><a class="docs-heading-anchor" href="#Optimization-Problem">Optimization Problem</a><a id="Optimization-Problem-1"></a><a class="docs-heading-anchor-permalink" href="#Optimization-Problem" title="Permalink"></a></h2><p><code>MinimumTimeProblem</code> sets up:</p><pre><code class="nohighlight hljs">minimize:    J_original + D × Σ Δtₖ
 subject to:  Original dynamics and constraints
              F_final ≥ final_fidelity
              Δt_min ≤ Δtₖ ≤ Δt_max</code></pre><p>The parameter <code>D</code> controls the trade-off between the original objective and time minimization. Higher <code>D</code> values prioritize shorter duration.</p><h2 id="Examples"><a class="docs-heading-anchor" href="#Examples">Examples</a><a id="Examples-1"></a><a class="docs-heading-anchor-permalink" href="#Examples" title="Permalink"></a></h2><h3 id="Basic-Time-Optimal-Gate"><a class="docs-heading-anchor" href="#Basic-Time-Optimal-Gate">Basic Time-Optimal Gate</a><a id="Basic-Time-Optimal-Gate-1"></a><a class="docs-heading-anchor-permalink" href="#Basic-Time-Optimal-Gate" title="Permalink"></a></h3><pre><code class="language-julia hljs">using Piccolo
@@ -30,10 +30,10 @@ qtraj = UnitaryTrajectory(sys, pulse, GATES[:X])
 qcp_base = SmoothPulseProblem(qtraj, N; Q = 100.0, Δt_bounds = (0.05, 0.5))
 solve!(qcp_base; max_iter = 100)
 
-get_duration(get_trajectory(qcp_base))</code></pre><pre class="documenter-example-output"><code class="nohighlight hljs ansi">23.40737814001422</code></pre><pre><code class="language-julia hljs">fidelity(qcp_base)</code></pre><pre class="documenter-example-output"><code class="nohighlight hljs ansi">0.999940716185951</code></pre><h3 id="Step-2:-Minimize-Time"><a class="docs-heading-anchor" href="#Step-2:-Minimize-Time">Step 2: Minimize Time</a><a id="Step-2:-Minimize-Time-1"></a><a class="docs-heading-anchor-permalink" href="#Step-2:-Minimize-Time" title="Permalink"></a></h3><pre><code class="language-julia hljs">qcp_mintime = MinimumTimeProblem(qcp_base; final_fidelity = 0.99, D = 100.0)
+get_duration(get_trajectory(qcp_base))</code></pre><pre class="documenter-example-output"><code class="nohighlight hljs ansi">23.40737814001422</code></pre><pre><code class="language-julia hljs">fidelity(qcp_base)</code></pre><pre class="documenter-example-output"><code class="nohighlight hljs ansi">0.9999403535049575</code></pre><h3 id="Step-2:-Minimize-Time"><a class="docs-heading-anchor" href="#Step-2:-Minimize-Time">Step 2: Minimize Time</a><a id="Step-2:-Minimize-Time-1"></a><a class="docs-heading-anchor-permalink" href="#Step-2:-Minimize-Time" title="Permalink"></a></h3><pre><code class="language-julia hljs">qcp_mintime = MinimumTimeProblem(qcp_base; final_fidelity = 0.99, D = 100.0)
 solve!(qcp_mintime; max_iter = 100)
 
-get_duration(get_trajectory(qcp_mintime))</code></pre><pre class="documenter-example-output"><code class="nohighlight hljs ansi">13.507103487802157</code></pre><pre><code class="language-julia hljs">fidelity(qcp_mintime)</code></pre><pre class="documenter-example-output"><code class="nohighlight hljs ansi">0.9900010557899738</code></pre><h3 id="Exploring-Fidelity-Time-Trade-off"><a class="docs-heading-anchor" href="#Exploring-Fidelity-Time-Trade-off">Exploring Fidelity-Time Trade-off</a><a id="Exploring-Fidelity-Time-Trade-off-1"></a><a class="docs-heading-anchor-permalink" href="#Exploring-Fidelity-Time-Trade-off" title="Permalink"></a></h3><pre><code class="language-julia hljs">results = []
+get_duration(get_trajectory(qcp_mintime))</code></pre><pre class="documenter-example-output"><code class="nohighlight hljs ansi">13.507103487802157</code></pre><pre><code class="language-julia hljs">fidelity(qcp_mintime)</code></pre><pre class="documenter-example-output"><code class="nohighlight hljs ansi">0.9900010557899727</code></pre><h3 id="Exploring-Fidelity-Time-Trade-off"><a class="docs-heading-anchor" href="#Exploring-Fidelity-Time-Trade-off">Exploring Fidelity-Time Trade-off</a><a id="Exploring-Fidelity-Time-Trade-off-1"></a><a class="docs-heading-anchor-permalink" href="#Exploring-Fidelity-Time-Trade-off" title="Permalink"></a></h3><pre><code class="language-julia hljs">results = []
 for target_fidelity in [0.999, 0.99, 0.95, 0.90]
     qcp_mt = MinimumTimeProblem(qcp_base; final_fidelity = target_fidelity)
     solve!(
@@ -78,9 +78,9 @@ end</code></pre><pre class="documenter-example-output"><code class="nohighlight 
 │
 ├─ <span class="sgr1">Objective</span>   <span class="sgr90">total = 2341  @ current x</span>
 │    KnotPointObjective           w=1             1.649e-07
-│    QuadraticRegularizer(:u)     w=1             2.968e-04
-│    QuadraticRegularizer(:du)    w=1             7.039e-04
-│    QuadraticRegularizer(:ddu)   w=1             2.250e-03
+│    QuadraticRegularizer(:u)     w=1             1.255e-03
+│    QuadraticRegularizer(:du)    w=1             2.977e-03
+│    QuadraticRegularizer(:ddu)   w=1             9.518e-03
 │    NullObjective                w=1             0
 │    MinimumTimeObjective         w=1             2341
 │
@@ -131,9 +131,9 @@ constructing MinimumTimeProblem [from UnitaryTrajectory]
 │
 ├─ <span class="sgr1">Objective</span>   <span class="sgr90">total = 2341  @ current x</span>
 │    KnotPointObjective           w=1             1.649e-07
-│    QuadraticRegularizer(:u)     w=1             2.968e-04
-│    QuadraticRegularizer(:du)    w=1             7.039e-04
-│    QuadraticRegularizer(:ddu)   w=1             2.250e-03
+│    QuadraticRegularizer(:u)     w=1             1.255e-03
+│    QuadraticRegularizer(:du)    w=1             2.977e-03
+│    QuadraticRegularizer(:ddu)   w=1             9.518e-03
 │    NullObjective                w=1             0
 │    MinimumTimeObjective         w=1             2341
 │
@@ -184,9 +184,9 @@ constructing MinimumTimeProblem [from UnitaryTrajectory]
 │
 ├─ <span class="sgr1">Objective</span>   <span class="sgr90">total = 2341  @ current x</span>
 │    KnotPointObjective           w=1             1.649e-07
-│    QuadraticRegularizer(:u)     w=1             2.968e-04
-│    QuadraticRegularizer(:du)    w=1             7.039e-04
-│    QuadraticRegularizer(:ddu)   w=1             2.250e-03
+│    QuadraticRegularizer(:u)     w=1             1.255e-03
+│    QuadraticRegularizer(:du)    w=1             2.977e-03
+│    QuadraticRegularizer(:ddu)   w=1             9.518e-03
 │    NullObjective                w=1             0
 │    MinimumTimeObjective         w=1             2341
 │
@@ -237,9 +237,9 @@ constructing MinimumTimeProblem [from UnitaryTrajectory]
 │
 ├─ <span class="sgr1">Objective</span>   <span class="sgr90">total = 2341  @ current x</span>
 │    KnotPointObjective           w=1             1.649e-07
-│    QuadraticRegularizer(:u)     w=1             2.968e-04
-│    QuadraticRegularizer(:du)    w=1             7.039e-04
-│    QuadraticRegularizer(:ddu)   w=1             2.250e-03
+│    QuadraticRegularizer(:u)     w=1             1.255e-03
+│    QuadraticRegularizer(:du)    w=1             2.977e-03
+│    QuadraticRegularizer(:ddu)   w=1             9.518e-03
 │    NullObjective                w=1             0
 │    MinimumTimeObjective         w=1             2341
 │
@@ -315,9 +315,9 @@ solve!(qcp_y; max_iter = 100)</code></pre><pre class="documenter-example-output"
 │
 ├─ <span class="sgr1">Objective</span>   <span class="sgr90">total = 2341  @ current x</span>
 │    KnotPointObjective           w=1             1.649e-07
-│    QuadraticRegularizer(:u)     w=1             2.968e-04
-│    QuadraticRegularizer(:du)    w=1             7.039e-04
-│    QuadraticRegularizer(:ddu)   w=1             2.250e-03
+│    QuadraticRegularizer(:u)     w=1             1.255e-03
+│    QuadraticRegularizer(:du)    w=1             2.977e-03
+│    QuadraticRegularizer(:ddu)   w=1             9.518e-03
 │    NullObjective                w=1             0
 │    MinimumTimeObjective         w=1             2341
 │
@@ -408,7 +408,7 @@ EXIT: Maximum Number of Iterations Exceeded.
         applying constraint: bounds on ddu
         applying constraint: time consistency constraint (t_{k+1} = t_k + Δt_k)
         applying constraint: initial time t₁ = 0
-<span class="sgr36"><span class="sgr1">[ Info: </span></span>Loaded cached trajectory from mintime_y_gate_573ffb2.jld2</code></pre><h2 id="See-Also"><a class="docs-heading-anchor" href="#See-Also">See Also</a><a id="See-Also-1"></a><a class="docs-heading-anchor-permalink" href="#See-Also" title="Permalink"></a></h2><ul><li><a href="../smooth_pulse/#smooth-pulse">SmoothPulseProblem</a> - Base problem for piecewise constant controls</li><li><a href="../bang_bang_pulse/#bang-bang-pulse">BangBangPulseProblem</a> - Base problem for bang-bang controls</li><li><a href="../spline_pulse/#spline-pulse">SplinePulseProblem</a> - Base problem for spline controls</li><li><a href="../sampling/#sampling">SamplingProblem</a> - Add robustness before minimizing time</li><li><a href="../composition/#composition">Composing Templates</a> - Advanced composition patterns</li></ul><hr/><p><em>This page was generated using <a href="https://github.com/fredrikekre/Literate.jl">Literate.jl</a>.</em></p></article><nav class="docs-footer"><a class="docs-footer-prevpage" href="../spline_pulse/">« SplinePulseProblem</a><a class="docs-footer-nextpage" href="../sampling/">SamplingProblem »</a><div class="flexbox-break"></div><p class="footer-message">Powered by <a href="https://github.com/JuliaDocs/Documenter.jl">Documenter.jl</a> and the <a href="https://julialang.org/">Julia Programming Language</a>.</p></nav></div><div class="modal" id="documenter-settings"><div class="modal-background"></div><div class="modal-card"><header class="modal-card-head"><p class="modal-card-title">Settings</p><button class="delete"></button></header><section class="modal-card-body"><p><label class="label">Theme</label></p><div class="select"><select id="documenter-themepicker"><option value="auto">Automatic (OS)</option><option value="documenter-light">documenter-light</option><option value="documenter-dark">documenter-dark</option><option value="catppuccin-latte">catppuccin-latte</option><option value="catppuccin-frappe">catppuccin-frappe</option><option value="catppuccin-macchiato">catppuccin-macchiato</option><option value="catppuccin-mocha">catppuccin-mocha</option></select></div><p></p><hr/><p>This document was generated with <a href="https://github.com/JuliaDocs/Documenter.jl">Documenter.jl</a> version 1.17.0 on <span class="colophon-date" title="Friday 21 August 2026 06:29">Friday 21 August 2026</span>. Using Julia version 1.12.7.</p></section><footer class="modal-card-foot"></footer></div></div></div><script id="documenter-copybutton-config" type="application/json">
+<span class="sgr36"><span class="sgr1">[ Info: </span></span>Loaded cached trajectory from mintime_y_gate_573ffb2.jld2</code></pre><h2 id="See-Also"><a class="docs-heading-anchor" href="#See-Also">See Also</a><a id="See-Also-1"></a><a class="docs-heading-anchor-permalink" href="#See-Also" title="Permalink"></a></h2><ul><li><a href="../smooth_pulse/#smooth-pulse">SmoothPulseProblem</a> - Base problem for piecewise constant controls</li><li><a href="../bang_bang_pulse/#bang-bang-pulse">BangBangPulseProblem</a> - Base problem for bang-bang controls</li><li><a href="../spline_pulse/#spline-pulse">SplinePulseProblem</a> - Base problem for spline controls</li><li><a href="../sampling/#sampling">SamplingProblem</a> - Add robustness before minimizing time</li><li><a href="../composition/#composition">Composing Templates</a> - Advanced composition patterns</li></ul><hr/><p><em>This page was generated using <a href="https://github.com/fredrikekre/Literate.jl">Literate.jl</a>.</em></p></article><nav class="docs-footer"><a class="docs-footer-prevpage" href="../spline_pulse/">« SplinePulseProblem</a><a class="docs-footer-nextpage" href="../sampling/">SamplingProblem »</a><div class="flexbox-break"></div><p class="footer-message">Powered by <a href="https://github.com/JuliaDocs/Documenter.jl">Documenter.jl</a> and the <a href="https://julialang.org/">Julia Programming Language</a>.</p></nav></div><div class="modal" id="documenter-settings"><div class="modal-background"></div><div class="modal-card"><header class="modal-card-head"><p class="modal-card-title">Settings</p><button class="delete"></button></header><section class="modal-card-body"><p><label class="label">Theme</label></p><div class="select"><select id="documenter-themepicker"><option value="auto">Automatic (OS)</option><option value="documenter-light">documenter-light</option><option value="documenter-dark">documenter-dark</option><option value="catppuccin-latte">catppuccin-latte</option><option value="catppuccin-frappe">catppuccin-frappe</option><option value="catppuccin-macchiato">catppuccin-macchiato</option><option value="catppuccin-mocha">catppuccin-mocha</option></select></div><p></p><hr/><p>This document was generated with <a href="https://github.com/JuliaDocs/Documenter.jl">Documenter.jl</a> version 1.17.0 on <span class="colophon-date" title="Friday 28 August 2026 10:53">Friday 28 August 2026</span>. Using Julia version 1.12.7.</p></section><footer class="modal-card-foot"></footer></div></div></div><script id="documenter-copybutton-config" type="application/json">
 {"mdUrl":"./minimum_time.jl","providers":[{"name":"ChatGPT","base":"https://chatgpt.com/?q=","suffix":"&hints=search"},{"name":"Claude (beta)","base":"https://claude.ai/new?q=","suffix":""},{"name":"Perplexity","base":"https://www.perplexity.ai/?q=","suffix":""},{"name":"Grok","base":"https://x.com/i/grok?text=","suffix":""},{"name":"v0","base":"https://v0.app/chat?q=","suffix":""},{"name":"Cursor","base":"https://cursor.com/link/prompt?text=","suffix":""},{"name":"Zed","base":"zed://agent?prompt=","suffix":""}],"prompt":"Read","copyLabel":"Copy for AI","pagePath":"generated/problem-templates/minimum_time.md"}
 </script><script id="documenter-copybutton-content" type="text/plain"># ```@copybutton
 # literate/problem-templates/minimum_time.jl
@@ -452,7 +452,7 @@ EXIT: Maximum Number of Iterations Exceeded.
 #
 # ```julia
 # MinimumTimeProblem(
-#     qcp::QuantumControlProblem;
+#     p::AbstractQuantumControlProblem;
 #     goal = nothing,
 #     final_fidelity = 0.99,
 #     D = 100.0,
@@ -464,7 +464,7 @@ EXIT: Maximum Number of Iterations Exceeded.
 #
 # | Parameter | Type | Default | Description |
 # |-----------|------|---------|-------------|
-# | `qcp` | `QuantumControlProblem` | required | Base problem to convert (must have `Δt_bounds`) |
+# | `p` | `AbstractQuantumControlProblem` | required | Base problem to convert (must have `Δt_bounds`) |
 # | `goal` | `AbstractPiccoloOperator` or `AbstractVector` | `nothing` | Optional new goal (uses base problem's goal if `nothing`) |
 # | `final_fidelity` | `Float64` | `0.99` | Minimum fidelity constraint |
 # | `D` | `Float64` | `100.0` | Weight on total time objective |
